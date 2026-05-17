@@ -1,6 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,7 +18,7 @@ app.get('/', (req, res) => {
   res.send('Aider test is working!');
 });
 
-// Link user routes under /api/users
+// User routes
 app.use('/api/users', userRoutes);
 
 // Start server
