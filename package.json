@@ -2,7 +2,7 @@
   "name": "automotive-ecommerce",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +10,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeshavSr10/UCT-Automotive-Ecommerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KeshavSr10/UCT-Automotive-Ecommerce/issues"
+  },
+  "homepage": "https://github.com/KeshavSr10/UCT-Automotive-Ecommerce#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2"
+  }
 }
