@@ -1,6 +1,13 @@
+import dns from 'node:dns';
+// Forces Node to bypass the broken local ISP lookup using Google and Cloudflare DNS
+dns.setServers(['8.8.8.8', '1.1.1.1']); 
+
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
+// 1. Import your new modular product routes
+import productRoutes from './routes/productRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -11,6 +18,9 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/automotive
 
 // Middleware for parsing JSON bodies
 app.use(express.json());
+
+// 2. Link the product routes to your API endpoint
+app.use('/api/products', productRoutes);
 
 // Connect to MongoDB
 const connectDB = async () => {
