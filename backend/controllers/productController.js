@@ -4,7 +4,7 @@ import Product from '../models/Product.js';
 // @route   GET /api/products
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const products = await Product.findAll();
     res.status(200).json({
       success: true,
       count: products.length,

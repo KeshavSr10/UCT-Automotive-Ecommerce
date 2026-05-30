@@ -1,26 +1,32 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
-import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import { sequelize } from './db.js';
 import userRoutes from './routes/userRoutes.js';
-import productRoutes from './routes/productRoutes.js'; // <-- Add this import
+import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-// Mounted API Routes
+// Routes
 app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes); // <-- Add this route mounting
+app.use('/api/products', productRoutes);
 
-const PORT = process.env.PORT || 5000;
-
-mongoose.connect(process.env.MONGO_URI)
+// Test Connection and Sync Models
+sequelize.authenticate()
   .then(() => {
-    console.log('MongoDB Connected...');
+    console.log('🚀 PostgreSQL connection established successfully via Neon!');
+    return sequelize.sync({ alter: true }); // Syncs models to cloud database tables
+  })
+  .then(() => {
+    console.log('📦 All PostgreSQL models synchronized successfully!');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.error('❌ Unable to connect to the PostgreSQL database:', err.message);
+  });
