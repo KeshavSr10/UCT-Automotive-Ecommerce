@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import { sequelize } from '../db.js';
 
-const Product = sequelize.define('Product', {
+const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,25 +11,12 @@ const Product = sequelize.define('Product', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  price: {
-    type: DataTypes.FLOAT,
+  email: {
+    type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 0.0
+    unique: true
   },
-  category: {
-    type: DataTypes.ENUM('Parts', 'Accessories', 'Tools', 'Tyres', 'Oil & Fluids'),
-    allowNull: false
-  },
-  stock: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  imageUrl: {
+  password: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -42,8 +29,8 @@ const Product = sequelize.define('Product', {
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'products',
+  tableName: 'users',
   timestamps: true
 });
 
-export default Product;
+export default User;
